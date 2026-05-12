@@ -21,9 +21,16 @@ def create_transaction(borrower_id: str, decision: str, amount: float, score: fl
     }
 
 
-def generate_ledger(scored_df: pd.DataFrame, max_records: int = 80) -> pd.DataFrame:
-    """Generate ledger records for approved/review/conditional borrowers."""
-    eligible = scored_df[scored_df["decision"].isin(["Approved", "Review", "Conditional"])].head(max_records)
+def generate_ledger(scored_df, max_records=None):
+
+    eligible = scored_df[
+        scored_df["decision"].isin(
+            ["Approved", "Review", "Conditional"]
+        )
+    ]
+
+    if max_records is not None:
+        eligible = eligible.head(max_records)
 
     records = [
         create_transaction(
