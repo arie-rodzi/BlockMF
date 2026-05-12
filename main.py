@@ -9,9 +9,9 @@ import streamlit as st
 ROOT = Path(__file__).resolve().parent
 sys.path.append(str(ROOT))
 
-from modules.data_generator import generate_borrowers
-from modules.scoring import score_borrowers, explain_decision
-from modules.ledger import build_ledger
+from data_generator import generate_borrowers
+from scoring import calculate_scores
+from blockchain import create_transaction
 
 st.set_page_config(page_title="BlockMF", page_icon="⛓️", layout="wide")
 
